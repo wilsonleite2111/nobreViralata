@@ -1,4 +1,6 @@
-<x-layouts.site>
+<x-layouts.site :image="$heroImageUrl">
+    <x-structured-data :data="$structuredData" />
+
     @if ($heroImageUrl)
         <section class="relative flex min-h-[70vh] items-end">
             <img src="{{ $heroImageUrl }}" alt="" fetchpriority="high" class="absolute inset-0 size-full object-cover">

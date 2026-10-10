@@ -19,6 +19,14 @@ class HomeController extends Controller
 
         return view('home', [
             'heroImageUrl' => filled($heroImage) ? Storage::disk('public')->url($heroImage) : null,
+            'structuredData' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'MusicGroup',
+                'name' => config('app.name'),
+                'url' => route('home'),
+                'image' => asset('images/banda.jpg'),
+                'sameAs' => [config('site.instagram_url')],
+            ],
             'tagline' => Setting::read(Setting::HOME_TAGLINE),
             'shows' => Show::query()->published()->upcoming()->oldest('starts_at')->limit(3)->get(),
             // A featured video wins; otherwise the newest one is shown.

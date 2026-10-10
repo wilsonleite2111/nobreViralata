@@ -1,7 +1,5 @@
 <x-layouts.site :title="$show->title" :description="$show->title.' — '.$show->venue.', '.$show->location().', '.$show->starts_at->format('d/m/Y').'.'">
-    @push('head')
-        <script type="application/ld+json">{!! json_encode($show->toStructuredData(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_THROW_ON_ERROR) !!}</script>
-    @endpush
+    <x-structured-data :data="$show->toStructuredData()" />
 
     <article class="mx-auto max-w-3xl px-4 py-12 lg:px-8 lg:py-20">
         <a href="{{ $show->isUpcoming() ? route('shows.index') : route('shows.past') }}" class="font-display text-sm font-medium uppercase tracking-widest text-white/70 transition hover:text-brand">

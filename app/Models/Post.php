@@ -88,6 +88,26 @@ class Post extends Model implements HasMedia
         return $this->getFirstMedia(self::COVER)?->getAvailableUrl([$conversion]);
     }
 
+    /**
+     * Schema.org NewsArticle data for search engines.
+     *
+     * @return array<string, mixed>
+     */
+    public function toStructuredData(): array
+    {
+        return array_filter([
+            '@context' => 'https://schema.org',
+            '@type' => 'NewsArticle',
+            'headline' => $this->title,
+            'description' => $this->summary(),
+            'image' => $this->coverUrl('large'),
+            'datePublished' => $this->published_at->toIso8601String(),
+            'dateModified' => $this->updated_at?->toIso8601String(),
+            'url' => route('news.show', $this),
+            'author' => ['@type' => 'MusicGroup', 'name' => config('app.name')],
+        ]);
+    }
+
     public function summary(): string
     {
         return $this->excerpt ?? Str::limit(trim(html_entity_decode(strip_tags($this->body))), 160);

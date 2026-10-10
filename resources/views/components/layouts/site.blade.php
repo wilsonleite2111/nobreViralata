@@ -1,4 +1,10 @@
-@props(['title' => null, 'description' => 'Site oficial da banda Nobre Vira Lata: shows, fotos, vídeos, notícias e loja.'])
+@props([
+    'title' => null,
+    'description' => 'Site oficial da banda Nobre Vira Lata: shows, fotos, vídeos, notícias e loja.',
+    'image' => null,
+    'type' => 'website',
+    'noindex' => false,
+])
 
 @php
     $navigation = [
@@ -10,7 +16,8 @@
         'store.index' => 'Loja',
         'contact' => 'Contato',
     ];
-    $instagramUrl = 'https://www.instagram.com/bandanobreviralata';
+    $pageTitle = $title ? $title.' — '.config('app.name') : config('app.name');
+    $shareImage = $image ?? asset('images/banda.jpg');
 @endphp
 
 <!DOCTYPE html>
@@ -21,7 +28,22 @@
         <meta name="description" content="{{ $description }}">
         <meta name="theme-color" content="#1f1a17">
 
-        <title>{{ $title ? $title.' — '.config('app.name') : config('app.name') }}</title>
+        <title>{{ $pageTitle }}</title>
+
+        @if ($noindex)
+            <meta name="robots" content="noindex">
+        @else
+            <link rel="canonical" href="{{ url()->current() }}">
+        @endif
+
+        <meta property="og:site_name" content="{{ config('app.name') }}">
+        <meta property="og:locale" content="pt_BR">
+        <meta property="og:type" content="{{ $type }}">
+        <meta property="og:title" content="{{ $pageTitle }}">
+        <meta property="og:description" content="{{ $description }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:image" content="{{ $shareImage }}">
+        <meta name="twitter:card" content="summary_large_image">
 
         <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
@@ -92,11 +114,14 @@
             <div class="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-10 text-center lg:flex-row lg:justify-between lg:px-8 lg:text-left">
                 <img src="{{ asset('images/logo-horizontal.jpg') }}" alt="{{ config('app.name') }}" width="800" height="221" loading="lazy" class="h-12 w-auto">
 
-                <a href="{{ $instagramUrl }}" target="_blank" rel="noopener" class="font-display text-sm font-medium uppercase tracking-widest transition hover:text-brand">
+                <a href="{{ config('site.instagram_url') }}" target="_blank" rel="noopener" class="font-display text-sm font-medium uppercase tracking-widest transition hover:text-brand">
                     Instagram · @bandanobreviralata
                 </a>
 
-                <p class="text-sm text-white/50">&copy; {{ date('Y') }} {{ config('app.name') }}. Todos os direitos reservados.</p>
+                <p class="text-sm text-white/60">
+                    &copy; {{ date('Y') }} {{ config('app.name') }}. Todos os direitos reservados.
+                    <a href="{{ route('privacy') }}" class="underline transition hover:text-brand">Privacidade</a>
+                </p>
             </div>
         </footer>
 

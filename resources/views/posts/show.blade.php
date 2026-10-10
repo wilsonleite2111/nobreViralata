@@ -1,4 +1,6 @@
-<x-layouts.site :title="$post->title" :description="$post->summary()">
+<x-layouts.site :title="$post->title" :description="$post->summary()" :image="$post->coverUrl('large')" type="article">
+    <x-structured-data :data="$post->toStructuredData()" />
+
     <article class="mx-auto max-w-3xl px-4 py-12 lg:px-8 lg:py-20">
         <a href="{{ route('news.index') }}" class="font-display text-sm font-medium uppercase tracking-widest text-white/70 transition hover:text-brand">
             &larr; Todas as notícias

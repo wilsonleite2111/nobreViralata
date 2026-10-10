@@ -37,7 +37,10 @@
                 <p id="newsletter-email-error" class="mt-3 text-left text-red-400">{{ $message }}</p>
             @enderror
 
-            <p class="mt-4 text-sm text-white/50">Você confirma a inscrição por e-mail e pode sair da lista quando quiser.</p>
+            <p class="mt-4 text-sm text-white/60">
+                Você confirma a inscrição por e-mail e pode sair da lista quando quiser.
+                <a href="{{ route('privacy') }}" class="underline hover:text-brand">Política de privacidade</a>.
+            </p>
         @endif
     </div>
 </section>

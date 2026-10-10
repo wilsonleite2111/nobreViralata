@@ -19,13 +19,15 @@ it('renders with no content, offering only the newsletter', function (): void {
 });
 
 it('shows the official band photo until a hero image is set', function (): void {
-    $this->get('/')->assertSee('images/banda.jpg');
+    $officialPhoto = '<img src="'.asset('images/banda.jpg').'"';
+
+    $this->get('/')->assertSee($officialPhoto, escape: false);
 
     Setting::write(Setting::HOME_HERO_IMAGE, 'site/hero.jpg');
 
     $this->get('/')
         ->assertSee('/storage/site/hero.jpg')
-        ->assertDontSee('images/banda.jpg');
+        ->assertDontSee($officialPhoto, escape: false);
 });
 
 it('shows the tagline written in the admin, escaped', function (): void {

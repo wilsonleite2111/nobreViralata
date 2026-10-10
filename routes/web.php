@@ -8,7 +8,9 @@ use App\Http\Controllers\PastShowController;
 use App\Http\Controllers\PhotoAlbumController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\ShowController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,11 @@ Route::get('/loja', [ProductController::class, 'index'])->name('store.index');
 Route::get('/loja/{product:slug}', [ProductController::class, 'show'])->name('store.show');
 Route::get('/contato', [ContactMessageController::class, 'create'])->name('contact');
 Route::post('/contato', [ContactMessageController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+
+Route::view('/privacidade', 'privacy')->name('privacy');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 Route::post('/newsletter', [NewsletterSubscriptionController::class, 'store'])->middleware('throttle:5,1')->name('newsletter.store');
 Route::get('/newsletter/confirmar/{subscriber:token}', [NewsletterSubscriptionController::class, 'confirm'])->name('newsletter.confirm');

@@ -2,7 +2,7 @@
     $lightboxPhotos = $photos->map(fn ($photo) => $photo->getAvailableUrl(['large']))->values();
 @endphp
 
-<x-layouts.site :title="$album->title" :description="'Fotos: '.$album->title.' — '.$album->taken_at->format('d/m/Y').'.'">
+<x-layouts.site :title="$album->title" :description="'Fotos: '.$album->title.' — '.$album->taken_at->format('d/m/Y').'.'" :image="$lightboxPhotos->first()">
     <section
         class="mx-auto max-w-7xl px-4 py-12 lg:px-8 lg:py-20"
         x-data="{

@@ -119,6 +119,30 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * Schema.org Product data, so search engines can show price and availability.
+     *
+     * @return array<string, mixed>
+     */
+    public function toStructuredData(): array
+    {
+        return array_filter([
+            '@context' => 'https://schema.org',
+            '@type' => 'Product',
+            'name' => $this->name,
+            'description' => $this->description,
+            'image' => $this->cover()?->getAvailableUrl(['large']),
+            'brand' => ['@type' => 'Brand', 'name' => config('app.name')],
+            'offers' => [
+                '@type' => 'Offer',
+                'url' => route('store.show', $this),
+                'priceCurrency' => 'BRL',
+                'price' => number_format($this->price_cents / 100, 2, '.', ''),
+                'availability' => $this->isInStock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            ],
+        ]);
+    }
+
+    /**
      * Where the buy button leads: the external store when set, otherwise a WhatsApp chat with the order filled in.
      */
     public function purchaseUrl(?string $whatsappNumber, ?ProductVariant $variant = null): ?string

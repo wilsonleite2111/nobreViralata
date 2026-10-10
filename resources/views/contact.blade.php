@@ -56,6 +56,10 @@
             <button type="submit" class="bg-brand px-10 py-4 font-display text-lg font-medium uppercase tracking-widest text-ink transition hover:bg-brand-dark">
                 Enviar mensagem
             </button>
+
+            <p class="text-sm text-white/60">
+                Usamos seus dados só para responder à sua mensagem. Veja a <a href="{{ route('privacy') }}" class="underline hover:text-brand">política de privacidade</a>.
+            </p>
         </form>
     </section>
 </x-layouts.site>
