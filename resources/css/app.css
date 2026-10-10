@@ -15,6 +15,38 @@
     --color-brand-dark: #c4620d;
 }
 
+.rich-text {
+    @apply space-y-5 text-lg leading-relaxed text-white/80;
+
+    h2 {
+        @apply pt-4 font-display text-3xl font-bold uppercase tracking-wide text-white;
+    }
+
+    h3 {
+        @apply pt-2 font-display text-2xl font-medium uppercase tracking-wide text-white;
+    }
+
+    a {
+        @apply text-brand underline hover:text-white;
+    }
+
+    ul {
+        @apply list-disc space-y-2 pl-6;
+    }
+
+    ol {
+        @apply list-decimal space-y-2 pl-6;
+    }
+
+    blockquote {
+        @apply border-l-4 border-brand pl-5 text-white italic;
+    }
+
+    strong {
+        @apply font-semibold text-white;
+    }
+}
+
 [x-cloak] {
     display: none !important;
 }
