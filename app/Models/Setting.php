@@ -18,6 +18,22 @@ class Setting extends Model
 
     public const string BAND_HISTORY = 'band.history';
 
+    public const string STORE_WHATSAPP = 'store.whatsapp';
+
+    /**
+     * Reduces a phone number typed in any format to the digits wa.me expects, adding Brazil's country code when missing.
+     */
+    public static function normalizeWhatsapp(string $value): ?string
+    {
+        $digits = preg_replace('/\D+/', '', $value) ?? '';
+
+        if (in_array(strlen($digits), [10, 11], true)) {
+            $digits = '55'.$digits;
+        }
+
+        return in_array(strlen($digits), [12, 13], true) && str_starts_with($digits, '55') ? $digits : null;
+    }
+
     public static function read(string $key): ?string
     {
         return self::query()->where('key', $key)->value('value');

@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             VideoSeeder::class,
             MemberSeeder::class,
             PostSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

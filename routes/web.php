@@ -4,6 +4,7 @@ use App\Http\Controllers\BandController;
 use App\Http\Controllers\PastShowController;
 use App\Http\Controllers\PhotoAlbumController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,6 @@ Route::get('/fotos', [PhotoAlbumController::class, 'index'])->name('photos.index
 Route::get('/fotos/{photoAlbum:slug}', [PhotoAlbumController::class, 'show'])->name('photos.show');
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 Route::get('/banda', BandController::class)->name('band');
-Route::view('/loja', 'coming-soon', ['title' => 'Loja'])->name('store.index');
+Route::get('/loja', [ProductController::class, 'index'])->name('store.index');
+Route::get('/loja/{product:slug}', [ProductController::class, 'show'])->name('store.show');
 Route::view('/contato', 'coming-soon', ['title' => 'Contato'])->name('contact');
