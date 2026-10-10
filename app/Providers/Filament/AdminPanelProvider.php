@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->profile()
             ->brandName('Nobre Vira Lata')
             ->favicon(asset('images/favicon.png'))
             ->colors([

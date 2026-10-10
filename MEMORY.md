@@ -56,6 +56,7 @@ Verificação na última rodada: 242 testes passando, Pint e Larastan (nível 6)
 - **Formulários públicos** (contato e newsletter): Form Request com mensagens em português, campo oculto `website` como honeypot e `throttle:5,1`.
 - **Newsletter:** confirmação por e-mail (double opt-in) e saída com etapa de confirmação. O site só coleta a lista; não há envio de newsletter.
 - **SEO:** o layout `<x-layouts.site>` recebe `title`, `description`, `image`, `type` e `noindex`; dados estruturados passam por `<x-structured-data>`.
+- **Perfil no admin:** `/admin/profile` permite ao usuário trocar nome, e-mail e senha (a troca de senha exige a senha atual).
 - **Layout:** os itens do menu estão no próprio `resources/views/components/layouts/site.blade.php`; o link do Instagram está em `config/site.php`.
 
 ## Armadilhas já encontradas
@@ -74,7 +75,6 @@ Verificação na última rodada: 242 testes passando, Pint e Larastan (nível 6)
 
 - **Publicação:** tudo que depende de hospedagem (configuração de produção, deploy, HTTPS, worker de fila, SMTP, backup). A lista está na seção "Situação atual" do plano.
 - **Conteúdo real:** o banco local está vazio, exceto por um usuário admin criado para o Wilson. A senha gerada na sessão deve ser trocada antes de publicar.
-- **Página de perfil no admin:** oferecida e não respondida (permitiria trocar a senha pelo painel).
 - **Foto de abertura:** falta uma foto horizontal grande, sem a faixa da logo, para o hero em tela cheia.
 - **Política de privacidade:** o texto é um rascunho e precisa de revisão.
 - **Ideias mencionadas e não pedidas:** preço e SKU por variação, PhotoSwipe (zoom por pinça), imagens no corpo das notícias, envio da newsletter pelo site, mapa embutido nos shows.
