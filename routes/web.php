@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\PastShowController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 
-Route::view('/shows', 'coming-soon', ['title' => 'Shows'])->name('shows.index');
+Route::get('/shows', [ShowController::class, 'index'])->name('shows.index');
+Route::get('/shows/anteriores', [PastShowController::class, 'index'])->name('shows.past');
+Route::get('/shows/{show:slug}', [ShowController::class, 'show'])->name('shows.show');
 Route::view('/noticias', 'coming-soon', ['title' => 'Notícias'])->name('news.index');
 Route::view('/fotos', 'coming-soon', ['title' => 'Fotos'])->name('photos.index');
 Route::view('/videos', 'coming-soon', ['title' => 'Vídeos'])->name('videos.index');

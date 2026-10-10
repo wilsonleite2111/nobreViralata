@@ -28,6 +28,7 @@
         @fonts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
+        @stack('head')
     </head>
     <body class="flex min-h-screen flex-col bg-ink font-sans text-white antialiased">
         <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-brand focus:px-4 focus:py-2 focus:text-ink">
@@ -46,9 +47,9 @@
                             href="{{ route($routeName) }}"
                             @class([
                                 'font-display text-sm font-medium uppercase tracking-widest transition hover:text-brand',
-                                'text-brand' => request()->routeIs($routeName),
+                                'text-brand' => request()->routeIs(Str::before($routeName, '.').'*'),
                             ])
-                            @if (request()->routeIs($routeName)) aria-current="page" @endif
+                            @if (request()->routeIs(Str::before($routeName, '.').'*')) aria-current="page" @endif
                         >{{ $label }}</a>
                     @endforeach
                 </nav>
@@ -75,7 +76,7 @@
                             href="{{ route($routeName) }}"
                             @class([
                                 'border-b border-white/5 py-4 font-display text-lg font-medium uppercase tracking-widest last:border-b-0',
-                                'text-brand' => request()->routeIs($routeName),
+                                'text-brand' => request()->routeIs(Str::before($routeName, '.').'*'),
                             ])
                         >{{ $label }}</a>
                     @endforeach
