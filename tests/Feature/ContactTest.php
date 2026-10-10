@@ -117,3 +117,17 @@ it('escapes the sender\'s text in the notification e-mail', function (): void {
     $mail->assertDontSeeInHtml('<script>alert(1)</script>', escape: false);
     $mail->assertHasSubject('Contato pelo site: Evento');
 });
+
+it('returns 429 after thirty messages in a day, even when sent slowly', function (): void {
+    Mail::fake();
+
+    foreach (range(1, 30) as $attempt) {
+        $this->post('/contato', contactPayload())->assertRedirect();
+        $this->travel(61)->seconds();
+    }
+
+    $this->post('/contato', contactPayload())->assertTooManyRequests();
+
+    $this->travel(1)->days();
+    $this->post('/contato', contactPayload())->assertRedirect();
+});

@@ -19,8 +19,15 @@ it('shows a self-contained page in Portuguese for other errors', function (int $
         ->assertSee('Página inicial')
         ->assertDontSee('livewire', escape: false);
 })->with([
+    [403, 'Acesso negado'],
     [419, 'Página expirada'],
     [429, 'Muitas tentativas'],
     [500, 'Algo deu errado'],
     [503, 'Voltamos já'],
 ]);
+
+it('keeps the right status for errors without a page of their own', function (int $status): void {
+    Route::get('/_test/error', fn () => abort($status));
+
+    $this->get('/_test/error')->assertStatus($status);
+})->with([401, 402, 405, 418]);

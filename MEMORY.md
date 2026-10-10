@@ -53,7 +53,9 @@ Verificação na última rodada: 242 testes passando, Pint e Larastan (nível 6)
 - **Texto rico** (história da banda e notícias): sempre exibido pelo componente `<x-rich-text>`, que limpa o HTML na saída.
 - **Configurações do site:** tabela `settings` de chave e valor, com as chaves como constantes em `App\Models\Setting` e três páginas no admin (`ManageBand`, `ManageStore`, `ManageSite`).
 - **Loja:** preço em centavos (`price_cents`). Produto com variações usa o estoque das variações; sem variações, usa o estoque próprio. O botão de compra vem de `Product::purchaseUrl()`: link externo se houver, senão WhatsApp com produto e variação na mensagem.
-- **Formulários públicos** (contato e newsletter): Form Request com mensagens em português, campo oculto `website` como honeypot e `throttle:5,1`.
+- **Formulários públicos** (contato e newsletter): Form Request com mensagens em português, campo oculto `website` como honeypot e o limitador `throttle:public-forms` (5 por minuto e 30 por dia, por IP). A newsletter manda no máximo 3 e-mails de confirmação por endereço por dia.
+- **Segurança:** o middleware `SecurityHeaders` roda em toda resposta; `trustHosts()` rejeita hosts diferentes do `APP_URL` fora do ambiente local; proxies confiáveis vêm de `TRUSTED_PROXIES` (`config/trustedproxy.php`), vazio por padrão.
+- **Páginas de erro:** o modelo independente é `errors/standalone.blade.php`. Não crie `errors/minimal.blade.php` nem `errors/layout.blade.php`: esses nomes são usados pelo próprio Laravel e sobrepô-los transforma 401/402/403 em erro 500.
 - **Newsletter:** confirmação por e-mail (double opt-in) e saída com etapa de confirmação. O site só coleta a lista; não há envio de newsletter.
 - **SEO:** o layout `<x-layouts.site>` recebe `title`, `description`, `image`, `type` e `noindex`; dados estruturados passam por `<x-structured-data>`.
 - **Perfil no admin:** `/admin/profile` permite ao usuário trocar nome, e-mail e senha (a troca de senha exige a senha atual).
@@ -75,6 +77,7 @@ Verificação na última rodada: 242 testes passando, Pint e Larastan (nível 6)
 
 - **Publicação:** tudo que depende de hospedagem (configuração de produção, deploy, HTTPS, worker de fila, SMTP, backup). A lista está na seção "Situação atual" do plano.
 - **Conteúdo real:** o banco local está vazio, exceto por um usuário admin criado para o Wilson. A senha gerada na sessão deve ser trocada antes de publicar.
+- **Segurança, itens em aberto da análise de 2026-10-10:** todo usuário é admin total e não há segundo fator; o texto rico aceita `style` e imagens externas; a confirmação da newsletter é por GET; fotos de álbuns em rascunho abrem por link direto; os formulários não têm CAPTCHA. Em produção, definir `TRUSTED_PROXIES` e `SESSION_SECURE_COOKIE=true`.
 - **Foto de abertura:** falta uma foto horizontal grande, sem a faixa da logo, para o hero em tela cheia.
 - **Política de privacidade:** o texto é um rascunho e precisa de revisão.
 - **Ideias mencionadas e não pedidas:** preço e SKU por variação, PhotoSwipe (zoom por pinça), imagens no corpo das notícias, envio da newsletter pelo site, mapa embutido nos shows.

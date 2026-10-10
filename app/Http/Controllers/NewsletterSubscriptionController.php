@@ -8,6 +8,7 @@ use App\Models\Subscriber;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
 class NewsletterSubscriptionController extends Controller
@@ -24,7 +25,13 @@ class NewsletterSubscriptionController extends Controller
             if (! $subscriber->isActive()) {
                 $subscriber->update(['confirmed_at' => null, 'unsubscribed_at' => null]);
 
-                Mail::to($subscriber->email)->send(new NewsletterConfirmation($subscriber));
+                // Capped per address, so the form cannot be used to flood someone else's inbox.
+                RateLimiter::attempt(
+                    'newsletter-confirmation:'.sha1($subscriber->email),
+                    maxAttempts: 3,
+                    callback: fn () => Mail::to($subscriber->email)->send(new NewsletterConfirmation($subscriber)),
+                    decaySeconds: 86400,
+                );
             }
         }
 

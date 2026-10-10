@@ -84,6 +84,21 @@ describe('subscribing', function (): void {
         Mail::assertNothingQueued();
     });
 
+    it('stops e-mailing an address after three confirmations in a day, while answering as usual', function (): void {
+        Mail::fake();
+
+        foreach (range(1, 4) as $attempt) {
+            $this->post('/newsletter', ['email' => 'victim@example.com'])->assertSessionHas('newsletter_status');
+        }
+
+        Mail::assertQueued(NewsletterConfirmation::class, 3);
+
+        $this->travel(1)->days();
+        $this->post('/newsletter', ['email' => 'victim@example.com']);
+
+        Mail::assertQueued(NewsletterConfirmation::class, 4);
+    });
+
     it('returns 429 after five attempts in a minute', function (): void {
         Mail::fake();
 
