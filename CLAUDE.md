@@ -158,3 +158,9 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - After the feature tests pass, ask the user to run the complete suite with `php artisan test --compact`.
 
 </laravel-boost-guidelines>
+
+# Project memory
+
+Decisions, current state, conventions and pitfalls from past sessions live in the file below. Keep it up to date when a decision changes.
+
+@MEMORY.md
