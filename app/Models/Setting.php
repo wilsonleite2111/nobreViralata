@@ -20,6 +20,12 @@ class Setting extends Model
 
     public const string STORE_WHATSAPP = 'store.whatsapp';
 
+    public const string HOME_HERO_IMAGE = 'home.hero_image';
+
+    public const string HOME_TAGLINE = 'home.tagline';
+
+    public const string CONTACT_EMAIL = 'contact.email';
+
     /**
      * Reduces a phone number typed in any format to the digits wa.me expects, adding Brazil's country code when missing.
      */
