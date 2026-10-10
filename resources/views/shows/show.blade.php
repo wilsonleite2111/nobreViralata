@@ -50,4 +50,30 @@
             <div class="mt-10 whitespace-pre-line text-lg leading-relaxed text-white/80">{{ $show->description }}</div>
         @endif
     </article>
+
+    @if ($albums->isNotEmpty() || $videos->isNotEmpty())
+        <div class="mx-auto max-w-7xl space-y-16 px-4 pb-20 lg:px-8">
+            @if ($albums->isNotEmpty())
+                <section>
+                    <h2 class="font-display text-3xl font-bold uppercase tracking-wide">Fotos do show</h2>
+                    <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        @foreach ($albums as $album)
+                            <x-album-card :album="$album" />
+                        @endforeach
+                    </div>
+                </section>
+            @endif
+
+            @if ($videos->isNotEmpty())
+                <section>
+                    <h2 class="font-display text-3xl font-bold uppercase tracking-wide">Vídeos do show</h2>
+                    <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        @foreach ($videos as $video)
+                            <x-video-card :video="$video" />
+                        @endforeach
+                    </div>
+                </section>
+            @endif
+        </div>
+    @endif
 </x-layouts.site>

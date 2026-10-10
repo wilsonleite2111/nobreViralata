@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property CarbonImmutable $starts_at
@@ -41,6 +42,22 @@ class Show extends Model
             'status' => ShowStatus::class,
             'is_published' => 'boolean',
         ];
+    }
+
+    /**
+     * @return HasMany<PhotoAlbum, $this>
+     */
+    public function photoAlbums(): HasMany
+    {
+        return $this->hasMany(PhotoAlbum::class);
+    }
+
+    /**
+     * @return HasMany<Video, $this>
+     */
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class);
     }
 
     /**

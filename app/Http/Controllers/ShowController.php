@@ -18,6 +18,10 @@ class ShowController extends Controller
     {
         abort_unless($show->is_published, 404);
 
-        return view('shows.show', ['show' => $show]);
+        return view('shows.show', [
+            'show' => $show,
+            'albums' => $show->photoAlbums()->published()->with('media')->latest('taken_at')->get(),
+            'videos' => $show->videos()->published()->latest('published_at')->get(),
+        ]);
     }
 }

@@ -10,19 +10,7 @@
             @endforelse
         </div>
 
-        @if ($shows->hasPages())
-            <nav class="mt-8 flex justify-between font-display text-sm font-medium uppercase tracking-widest" aria-label="Paginação">
-                @if ($shows->onFirstPage())
-                    <span></span>
-                @else
-                    <a href="{{ $shows->previousPageUrl() }}" rel="prev" class="transition hover:text-brand">&larr; Mais recentes</a>
-                @endif
-
-                @if ($shows->hasMorePages())
-                    <a href="{{ $shows->nextPageUrl() }}" rel="next" class="transition hover:text-brand">Mais antigos &rarr;</a>
-                @endif
-            </nav>
-        @endif
+        <x-simple-pagination :paginator="$shows" previous="Mais recentes" next="Mais antigos" />
 
         <a href="{{ route('shows.index') }}" class="mt-10 inline-block font-display text-sm font-medium uppercase tracking-widest text-white/70 transition hover:text-brand">
             &larr; Próximos shows
