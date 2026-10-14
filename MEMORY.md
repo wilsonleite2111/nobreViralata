@@ -1,6 +1,6 @@
 # Memória do projeto — site da banda Nobre Vira Lata
 
-Resumo da sessão de 2026-10-10, em que o site foi planejado e construído do zero. Serve para retomar o trabalho sem reler a conversa. Atualize este arquivo quando uma decisão mudar.
+Resumo da sessão de 2026-10-10, em que o site foi planejado, construído do zero e passou por uma análise de segurança. Serve para retomar o trabalho sem reler a conversa. Atualize este arquivo quando uma decisão mudar.
 
 ## O que é
 
@@ -16,12 +16,14 @@ O plano completo, com o que mudou durante a implementação e a lista do que fal
 - **Cores:** as da logo oficial — preto `#1f1a17`, laranja `#e67817`, branco.
 - **Nome exibido:** "Nobre Vira Lata" (três palavras, como na logo), embora o pedido original escreva "Viralata". Instagram: `@bandanobreviralata`.
 - **Imagens oficiais:** `E:\NobreViraLata\Imagens oficiais` (duas logos e duas fotos). A mesma pasta tem áudios, letras e repertório antigos, ainda não usados no site.
-- **Domínio e hospedagem:** ainda não contratados.
+- **Domínio e hospedagem:** hospedagem compartilhada da Hostinger; domínio `www.bandanobreviralata.com.br`, registrado na própria Hostinger. Cloudflare fica para depois de o site estar no ar.
 - **Ritmo de trabalho:** uma fase por vez; ao fim de cada fase o Wilson pede o commit e a fase seguinte. Só faça commit quando ele pedir.
 
 ## Estado atual
 
-Fases 0 a 6 concluídas e commitadas na branch `main` (um commit por fase, último: `61f4ab3`). Sem remoto no GitHub. A Fase 6 cobre só o que não depende de hospedagem.
+Fases 0 a 6 concluídas e commitadas na branch `main`, um commit por fase. Depois vieram a página de perfil no admin e as correções dos itens 1 a 5 da análise de segurança. A Fase 6 cobre só o que não depende de hospedagem.
+
+O remoto é `https://github.com/wilsonleite2111/nobreViralata.git` (`origin`), e a `main` local está sincronizada com ele. Faça push só quando o Wilson pedir, assim como o commit.
 
 | Área | Público | Admin |
 |---|---|---|
@@ -34,7 +36,7 @@ Fases 0 a 6 concluídas e commitadas na branch `main` (um commit por fase, últi
 | Home, contato, newsletter | `/`, `/contato`, `/newsletter/...` | `/admin/site`, `/admin/contact-messages`, `/admin/subscribers` |
 | SEO e institucional | `/sitemap.xml`, `/robots.txt`, `/privacidade` | — |
 
-Verificação na última rodada: 242 testes passando, Pint e Larastan (nível 6) sem erros, Lighthouse mobile local com build de produção entre 94 e 99 em desempenho e 100 em acessibilidade e SEO.
+Verificação na última rodada: 265 testes passando, Pint e Larastan (nível 6) sem erros. O Lighthouse mobile local com build de produção, medido na Fase 6, ficou entre 94 e 99 em desempenho e 100 em acessibilidade e SEO.
 
 ## Stack
 
@@ -73,11 +75,44 @@ Verificação na última rodada: 242 testes passando, Pint e Larastan (nível 6)
 - **Dados de exemplo:** os seeders gravam arquivos em `storage/app/public`. Para conferências visuais, use um banco SQLite temporário e apague esses arquivos depois, conferindo antes se o banco real não tem mídia cadastrada.
 - **Testes do Filament:** validação de `RichEditor` vazio não expõe a regra `required` (teste só a chave); conteúdo de modal não aparece no HTML (teste o estado do componente); repetidores precisam de `Repeater::fake()`.
 
+## Deploy na Hostinger (em andamento, parado em 2026-10-13)
+
+Nada foi feito no servidor ainda. O desenho combinado:
+
+- Código por `git clone` via SSH em `domains/bandanobreviralata.com.br/app`; `public_html` vira link simbólico para `app/public`.
+- `public/build` está fora do Git: rodar `npm run build` na máquina do Wilson e enviar por `scp`.
+- Banco MySQL criado no hPanel; e-mail por SMTP da Hostinger com uma caixa do domínio.
+- Fila por cron a cada minuto (`php artisan queue:work --stop-when-empty`), porque não há worker permanente.
+- `APP_URL=https://www.bandanobreviralata.com.br`; o endereço sem `www` deve redirecionar para o com `www` no `.htaccess`, senão o `trustHosts()` o rejeita.
+- As senhas não passam pelo chat: o `.env` de produção é montado no servidor e o Wilson preenche banco e e-mail.
+
+Feito: chave SSH gerada em `C:\Users\Wilson\.ssh\id_ed25519` (sem senha, comentário `wilson-nobreviralata`, fingerprint `SHA256:YTYrSup9u+S2Doy0922c0dM5uIci4H+1g5gExq2Z08I`). A parte pública foi entregue ao Wilson para colar em hPanel → Avançado → Acesso SSH.
+
+Aguardando o Wilson:
+
+1. colar a chave pública no hPanel e informar IP, porta e usuário do SSH;
+2. vincular o domínio ao plano;
+3. PHP 8.4 com `intl` e `memory_limit` de 256 MB ou mais;
+4. criar o banco MySQL e a caixa de e-mail;
+5. conferir o SSL;
+6. decidir se o repositório continua público (ver Pendências).
+
+A conferir no primeiro acesso SSH: se o `php` da linha de comando é o 8.4, se há Composer 2 e se o cron aceita intervalo de 1 minuto.
+
+Passos seguintes, depois disso: clone, `composer install --no-dev`, `.env`, `key:generate`, `migrate --force`, `storage:link`, envio do build, `optimize`, link do `public_html`, redirecionamento para `www`, cron da fila, usuário admin e teste de envio de e-mail e de upload de foto.
+
 ## Pendências
 
-- **Publicação:** tudo que depende de hospedagem (configuração de produção, deploy, HTTPS, worker de fila, SMTP, backup). A lista está na seção "Situação atual" do plano.
+- **Publicação:** deploy em andamento (seção acima). Depois dele ainda faltam backup automático com teste de restauração e o Cloudflare. A lista original está na seção "Situação atual" do plano.
+- **Repositório público:** em 2026-10-13 o `wilsonleite2111/nobreViralata` estava público no GitHub. Não há segredo nele (o `.env` é ignorado), mas este arquivo também fica visível. Se virar privado, o servidor precisa de uma deploy key para o clone.
 - **Conteúdo real:** o banco local está vazio, exceto por um usuário admin criado para o Wilson. A senha gerada na sessão deve ser trocada antes de publicar.
-- **Segurança, itens em aberto da análise de 2026-10-10:** todo usuário é admin total e não há segundo fator; o texto rico aceita `style` e imagens externas; a confirmação da newsletter é por GET; fotos de álbuns em rascunho abrem por link direto; os formulários não têm CAPTCHA. Em produção, definir `TRUSTED_PROXIES` e `SESSION_SECURE_COOKIE=true`.
+- **Segurança, itens em aberto da análise de 2026-10-10** (os itens 1 a 5 foram corrigidos; estes não foram pedidos):
+  - item 6: todo usuário é admin total e não há segundo fator;
+  - item 7: o texto rico aceita `style` e imagens externas;
+  - item 8: a confirmação da newsletter é por GET;
+  - item 9: fotos de álbuns em rascunho abrem por link direto;
+  - os formulários não têm CAPTCHA, e a política de conteúdo não restringe scripts (Alpine, Livewire e Filament usam código inline).
+- **Segurança em produção:** `APP_DEBUG=false`, `APP_URL` com o domínio real (o `trustHosts()` depende dele), `TRUSTED_PROXIES` com os endereços do proxy ou do Cloudflare, `SESSION_SECURE_COOKIE=true`, docroot em `public/`, `composer install --no-dev`.
 - **Foto de abertura:** falta uma foto horizontal grande, sem a faixa da logo, para o hero em tela cheia.
 - **Política de privacidade:** o texto é um rascunho e precisa de revisão.
 - **Ideias mencionadas e não pedidas:** preço e SKU por variação, PhotoSwipe (zoom por pinça), imagens no corpo das notícias, envio da newsletter pelo site, mapa embutido nos shows.
