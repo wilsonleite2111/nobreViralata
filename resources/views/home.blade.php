@@ -3,7 +3,7 @@
 
     @if ($heroImageUrl)
         <section class="relative flex min-h-[70vh] items-end">
-            <img src="{{ $heroImageUrl }}" alt="" fetchpriority="high" class="absolute inset-0 size-full object-cover">
+            <img src="{{ $heroImageUrl }}" alt="" fetchpriority="high" class="absolute inset-0 size-full object-contain">
             <div class="absolute inset-0 bg-linear-to-t from-ink via-ink/50 to-transparent"></div>
 
             <div class="relative mx-auto w-full max-w-7xl px-4 pb-12 pt-40 lg:px-8 lg:pb-20">
