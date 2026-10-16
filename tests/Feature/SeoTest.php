@@ -13,8 +13,8 @@ it('gives every public page a canonical address and share tags', function (strin
         ->assertOk()
         ->assertSee('<link rel="canonical" href="'.url($uri).'">', escape: false)
         ->assertSee('<meta property="og:url" content="'.url($uri).'">', escape: false)
-        ->assertSee('<meta property="og:site_name" content="Nobre Vira Lata">', escape: false)
-        ->assertSee('<meta property="og:image" content="'.asset('images/banda.jpg').'">', escape: false)
+        ->assertSee('<meta property="og:site_name" content="Soul True Noise">', escape: false)
+        ->assertSee('<meta property="og:image" content="'.asset('images/capa.jpg').'">', escape: false)
         ->assertDontSee('noindex');
 })->with(['/shows', '/shows/anteriores', '/noticias', '/fotos', '/videos', '/banda', '/loja', '/contato', '/privacidade']);
 
@@ -26,7 +26,7 @@ it('leaves the query string out of the canonical address', function (): void {
 it('describes the band to search engines on the home page', function (): void {
     $this->get('/')
         ->assertSee('"@type":"MusicGroup"', escape: false)
-        ->assertSee('"sameAs":["https://www.instagram.com/bandanobreviralata"]', escape: false);
+        ->assertSee('"sameAs":["https://www.instagram.com/stn_soul_true_noise"]', escape: false);
 });
 
 it('shares the hero image on the home page once one is set', function (): void {

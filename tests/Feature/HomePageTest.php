@@ -19,7 +19,7 @@ it('renders with no content, offering only the newsletter', function (): void {
 });
 
 it('shows the official band photo until a hero image is set', function (): void {
-    $officialPhoto = '<img src="'.asset('images/banda.jpg').'"';
+    $officialPhoto = '<img src="'.asset('images/capa.jpg').'"';
 
     $this->get('/')->assertSee($officialPhoto, escape: false);
 

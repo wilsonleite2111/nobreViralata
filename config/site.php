@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'instagram_url' => 'https://www.instagram.com/bandanobreviralata',
+    'instagram_url' => 'https://www.instagram.com/stn_soul_true_noise',
 
 ];

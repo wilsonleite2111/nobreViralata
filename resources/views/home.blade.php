@@ -8,7 +8,7 @@
 
             <div class="relative mx-auto w-full max-w-7xl px-4 pb-12 pt-40 lg:px-8 lg:pb-20">
                 <h1 class="font-display text-5xl font-bold uppercase tracking-wide lg:text-8xl">
-                    Nobre <span class="text-brand">Vira Lata</span>
+                    Soul True <span class="text-brand">Noise</span>
                 </h1>
 
                 @if ($tagline)
@@ -20,10 +20,10 @@
         </section>
     @else
         <section class="mx-auto max-w-7xl px-4 py-10 text-center lg:px-8 lg:py-16">
-            <img src="{{ asset('images/banda.jpg') }}" alt="Os cinco integrantes da banda Nobre Vira Lata no palco" width="1088" height="574" fetchpriority="high" class="mx-auto w-full max-w-5xl">
+            <img src="{{ asset('images/capa.jpg') }}" alt="A banda tocando no palco, vista do alto" width="1600" height="1200" fetchpriority="high" class="mx-auto w-full max-w-5xl">
 
             <h1 class="mt-10 font-display text-4xl font-bold uppercase tracking-wide lg:text-6xl">
-                Nobre <span class="text-brand">Vira Lata</span>
+                Soul True <span class="text-brand">Noise</span>
             </h1>
 
             @if ($tagline)

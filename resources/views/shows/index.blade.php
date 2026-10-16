@@ -1,4 +1,4 @@
-<x-layouts.site title="Shows" description="Agenda de shows da banda Nobre Vira Lata: datas, locais e ingressos.">
+<x-layouts.site title="Shows" description="Agenda de shows da banda Soul True Noise: datas, locais e ingressos.">
     <section class="mx-auto max-w-5xl px-4 py-12 lg:px-8 lg:py-20">
         <h1 class="font-display text-4xl font-bold uppercase tracking-wide lg:text-6xl">Próximos shows</h1>
 

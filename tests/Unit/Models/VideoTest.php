@@ -25,6 +25,6 @@ it('does not extract an id from anything else', function (string $value): void {
     'too short id' => 'dQw4w9WgXc',
     'other site' => 'https://vimeo.com/watch?v=dQw4w9WgXcQ',
     'lookalike host' => 'https://youtube.com.evil.test/watch?v=dQw4w9WgXcQ',
-    'channel link' => 'https://www.youtube.com/@bandanobreviralata',
+    'channel link' => 'https://www.youtube.com/@stn_soul_true_noise',
     'markup' => '"><script>alert(1)</script>',
 ]);

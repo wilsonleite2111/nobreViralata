@@ -1,4 +1,4 @@
-<section id="newsletter" {{ $attributes->merge(['class' => 'scroll-mt-24 border-y border-white/10 bg-ink-soft']) }}>
+<section id="newsletter" {{ $attributes->merge(['class' => 'scroll-mt-32 border-y border-white/10 bg-ink-soft']) }}>
     <div class="mx-auto max-w-3xl px-4 py-16 text-center lg:px-8">
         <h2 class="font-display text-3xl font-bold uppercase tracking-wide lg:text-4xl">Receba as novidades</h2>
         <p class="mt-3 text-lg text-white/70">Shows, vídeos e lançamentos direto no seu e-mail.</p>

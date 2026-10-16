@@ -24,7 +24,7 @@ class HomeController extends Controller
                 '@type' => 'MusicGroup',
                 'name' => config('app.name'),
                 'url' => route('home'),
-                'image' => asset('images/banda.jpg'),
+                'image' => asset('images/capa.jpg'),
                 'sameAs' => [config('site.instagram_url')],
             ],
             'tagline' => Setting::read(Setting::HOME_TAGLINE),

@@ -1,3 +1,17 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+Site of the band Soul True Noise (STN): public pages plus a Filament admin at `/admin`. Architecture, decisions, conventions and known pitfalls are in `MEMORY.md` (imported at the end of this file).
+
+## Commands
+
+- `composer run dev` — app server, queue worker and Vite together. Use it instead of `php artisan serve` alone: thumbnails and e-mails go through the queue.
+- `npm run build` — production assets (`public/build` is not in Git).
+- `php artisan test --compact tests/Feature/ShowPagesTest.php` or `--filter=testName` — narrow test run; `composer test` runs the full suite.
+- `vendor/bin/pint --dirty --format agent` — formatting.
+- `vendor/bin/phpstan analyse` — Larastan level 6 over `app` and `routes`; keep it at zero errors.
+
 <laravel-boost-guidelines>
 === foundation rules ===
 

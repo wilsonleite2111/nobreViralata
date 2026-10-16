@@ -3,7 +3,7 @@
     $labelClasses = 'font-display text-sm uppercase tracking-widest text-white/70';
 @endphp
 
-<x-layouts.site title="Contato" description="Fale com a banda Nobre Vira Lata: contratação de shows, imprensa e parcerias.">
+<x-layouts.site title="Contato" description="Fale com a banda Soul True Noise: contratação de shows, imprensa e parcerias.">
     <section class="mx-auto max-w-2xl px-4 py-12 lg:px-8 lg:py-20">
         <h1 class="font-display text-4xl font-bold uppercase tracking-wide lg:text-6xl">Contato</h1>
         <p class="mt-4 text-lg text-white/70">Quer contratar a banda, falar de parceria ou só mandar um alô? Escreva pra gente.</p>

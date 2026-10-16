@@ -1,4 +1,4 @@
-<x-layouts.site title="Shows anteriores" description="Arquivo de shows já realizados pela banda Nobre Vira Lata.">
+<x-layouts.site title="Shows anteriores" description="Arquivo de shows já realizados pela banda Soul True Noise.">
     <section class="mx-auto max-w-5xl px-4 py-12 lg:px-8 lg:py-20">
         <h1 class="font-display text-4xl font-bold uppercase tracking-wide lg:text-6xl">Shows anteriores</h1>
 

@@ -1,10 +1,10 @@
-# Memória do projeto — site da banda Nobre Vira Lata
+# Memória do projeto — site da banda Soul True Noise (STN)
 
 Resumo da sessão de 2026-10-10, em que o site foi planejado, construído do zero e passou por uma análise de segurança. Serve para retomar o trabalho sem reler a conversa. Atualize este arquivo quando uma decisão mudar.
 
 ## O que é
 
-Site oficial da banda Nobre Vira Lata para divulgar shows, fotos, vídeos, notícias e produtos, inspirado no padrão do metallica.com (visual escuro, agenda em destaque, mídia e loja). Tudo é administrável em `/admin`.
+Site oficial da banda Soul True Noise (até 2026-10-16 era Nobre Vira Lata; o site foi construído com esse nome e depois renomeado) para divulgar shows, fotos, vídeos, notícias e produtos, inspirado no padrão do metallica.com (visual escuro, agenda em destaque, mídia e loja). Tudo é administrável em `/admin`.
 
 O plano completo, com o que mudou durante a implementação e a lista do que falta para publicar, está em `E:\www\PLANO_NOBRE_VIRALATA.md` (fora deste repositório).
 
@@ -13,10 +13,11 @@ O plano completo, com o que mudou durante a implementação e a lista do que fal
 - **Loja:** opção A, catálogo com compra externa (WhatsApp ou link). Checkout próprio (Mercado Pago + Melhor Envio) ficou como fase futura.
 - **Idioma:** só português. Sem versão em inglês.
 - **Notícias:** dentro do escopo. **Discografia:** fora do escopo.
-- **Cores:** as da logo oficial — preto `#1f1a17`, laranja `#e67817`, branco.
-- **Nome exibido:** "Nobre Vira Lata" (três palavras, como na logo), embora o pedido original escreva "Viralata". Instagram: `@bandanobreviralata`.
-- **Imagens oficiais:** `E:\NobreViraLata\Imagens oficiais` (duas logos e duas fotos). A mesma pasta tem áudios, letras e repertório antigos, ainda não usados no site.
-- **Domínio e hospedagem:** hospedagem compartilhada da Hostinger; domínio `www.bandanobreviralata.com.br`, registrado na própria Hostinger. Cloudflare fica para depois de o site estar no ar.
+- **Cores:** as da logo da Soul True Noise (2026-10-16) — fundo `#0e0d10`, fundo secundário `#1a191d`, prata do metal `#b6b7b0` como cor de destaque `brand` (escuro `#8f918b`), branco. Em 2026-10-16 o Wilson trocou o laranja do fogo (`#dd803a`) pelo prata no site inteiro. Ficam em `resources/css/app.css`, no `primary` do painel, no `theme-color` e na página de erro.
+- **Nome exibido:** "Soul True Noise", vindo do `APP_NAME` do `.env`. Instagram: `@stn_soul_true_noise` (`config/site.php` e rodapé).
+- **Nome do projeto:** STN = Soul True Noise. O `APP_NAME="stn"` do `.env.example` foi definido pelo Wilson e não deve ser revertido. Como o site exibe `config("app.name")` (títulos, rodapé, e-mails, dados estruturados) e os testes leem o `.env`, o `.env` local e o de produção usam `APP_NAME="Soul True Noise"`; com outro nome, 9 testes de SEO e layout falham.
+- **Imagens:** as atuais estão em `E:\STN\Imagens` (`Logo.jpeg` → `public/images/logo.jpg`, quadrada; `Capa.jpg` → `public/images/capa.jpg`, reduzida a 1600 px; o favicon é a caveira recortada da logo). A pasta tem mais fotos da banda ainda não usadas. As da Nobre Vira Lata ficavam em `E:\NobreViraLata\Imagens oficiais`.
+- **Domínio e hospedagem:** hospedagem compartilhada da Hostinger; domínio `www.bandanobreviralata.com.br`, registrado na própria Hostinger. Cloudflare fica para depois de o site estar no ar. **A rever:** o domínio ainda leva o nome antigo; o Wilson não decidiu se muda.
 - **Ritmo de trabalho:** uma fase por vez; ao fim de cada fase o Wilson pede o commit e a fase seguinte. Só faça commit quando ele pedir.
 
 ## Estado atual
@@ -43,7 +44,7 @@ Verificação na última rodada: 265 testes passando, Pint e Larastan (nível 6)
 - PHP 8.4, Laravel 13, Filament 5 (painel), Livewire, Alpine (vem com o Livewire), Tailwind 4, Vite.
 - `spatie/laravel-medialibrary` com o plugin do Filament para todas as imagens enviadas.
 - Pest 5, Larastan 3, Pint. Laravel Boost instalado (gera o bloco do `CLAUDE.md`, as skills em `.claude/skills` e o `.mcp.json`).
-- SQLite em desenvolvimento; MySQL previsto para produção.
+- Desenvolvimento local em MySQL 8.0 (banco `stn` em `127.0.0.1:3306`, usuário `root`) desde 2026-10-16; o SQLite antigo ficou para trás. Testes em SQLite em memória (`phpunit.xml`). Produção: MySQL/MariaDB da Hostinger.
 
 ## Como o código está organizado
 
@@ -81,7 +82,7 @@ Nada foi feito no servidor ainda. O desenho combinado:
 
 - Código por `git clone` via SSH em `domains/bandanobreviralata.com.br/app`; `public_html` vira link simbólico para `app/public`.
 - `public/build` está fora do Git: rodar `npm run build` na máquina do Wilson e enviar por `scp`.
-- Banco MySQL criado no hPanel; e-mail por SMTP da Hostinger com uma caixa do domínio.
+- Banco MySQL criado no hPanel; e-mail por SMTP da Hostinger com uma caixa do domínio. Em produção: `DB_CONNECTION=mysql` (funciona em MySQL e MariaDB) e `DB_HOST=localhost`.
 - Fila por cron a cada minuto (`php artisan queue:work --stop-when-empty`), porque não há worker permanente.
 - `APP_URL=https://www.bandanobreviralata.com.br`; o endereço sem `www` deve redirecionar para o com `www` no `.htaccess`, senão o `trustHosts()` o rejeita.
 - As senhas não passam pelo chat: o `.env` de produção é montado no servidor e o Wilson preenche banco e e-mail.

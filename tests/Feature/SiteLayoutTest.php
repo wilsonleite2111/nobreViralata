@@ -3,10 +3,10 @@
 it('renders the home page with the site layout', function (): void {
     $this->get('/')
         ->assertOk()
-        ->assertSee('Nobre Vira Lata')
-        ->assertSee('images/logo-horizontal.jpg')
+        ->assertSee('Soul True Noise')
+        ->assertSee('images/logo.jpg')
         ->assertSee('Próximos shows')
-        ->assertSee('@bandanobreviralata');
+        ->assertSee('@stn_soul_true_noise');
 });
 
 it('renders every navigation page', function (string $uri, string $title): void {

@@ -3,7 +3,7 @@
     $buyLabel = $product->external_url ? 'Comprar' : 'Comprar pelo WhatsApp';
 @endphp
 
-<x-layouts.site :title="$product->name" :description="$product->name.' — '.$product->formattedPrice().'. Produto oficial da banda Nobre Vira Lata.'" :image="$photoUrls->first()">
+<x-layouts.site :title="$product->name" :description="$product->name.' — '.$product->formattedPrice().'. Produto oficial da banda Soul True Noise.'" :image="$photoUrls->first()">
     <x-structured-data :data="$product->toStructuredData()" />
 
     <article class="mx-auto max-w-7xl px-4 py-12 lg:px-8 lg:py-20">

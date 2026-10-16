@@ -35,7 +35,7 @@ it('creates a product with photo and variants that then appears in the store', f
 
     Livewire::test(CreateProduct::class)
         ->fillForm([
-            'name' => 'Camiseta Vira Lata',
+            'name' => 'Camiseta Soul True Noise',
             'slug' => 'camiseta-vira-lata',
             'product_category_id' => $category->id,
             'price_cents' => '89.90',
@@ -60,7 +60,7 @@ it('creates a product with photo and variants that then appears in the store', f
         ->and($product->isInStock())->toBeTrue();
 
     Storage::disk('public')->assertExists($product->cover()->getPathRelativeToRoot('thumb'));
-    $this->get('/loja')->assertSee('Camiseta Vira Lata')->assertSee('R$ 89,90');
+    $this->get('/loja')->assertSee('Camiseta Soul True Noise')->assertSee('R$ 89,90');
 });
 
 it('shows the stored price in reais when editing and keeps it on save', function (): void {

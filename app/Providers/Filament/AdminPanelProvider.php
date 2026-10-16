@@ -28,10 +28,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->profile()
-            ->brandName('Nobre Vira Lata')
+            ->brandName('Soul True Noise')
             ->favicon(asset('images/favicon.png'))
             ->colors([
-                'primary' => Color::hex('#e67817'),
+                'primary' => Color::hex('#b6b7b0'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

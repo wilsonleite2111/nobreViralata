@@ -9,10 +9,10 @@
     --font-display: 'Oswald', 'Arial Narrow', ui-sans-serif, system-ui, sans-serif;
 
     /* Sampled from the official logo. */
-    --color-ink: #1f1a17;
-    --color-ink-soft: #2b2420;
-    --color-brand: #e67817;
-    --color-brand-dark: #c4620d;
+    --color-ink: #0e0d10;
+    --color-ink-soft: #1a191d;
+    --color-brand: #b6b7b0;
+    --color-brand-dark: #8f918b;
 }
 
 .rich-text {

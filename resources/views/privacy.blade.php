@@ -1,4 +1,4 @@
-<x-layouts.site title="Política de privacidade" description="Como o site da banda Nobre Vira Lata trata os dados pessoais de quem o visita.">
+<x-layouts.site title="Política de privacidade" description="Como o site da banda Soul True Noise trata os dados pessoais de quem o visita.">
     <article class="mx-auto max-w-3xl px-4 py-12 lg:px-8 lg:py-20">
         <h1 class="font-display text-4xl font-bold uppercase tracking-wide lg:text-6xl">Política de privacidade</h1>
 

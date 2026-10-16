@@ -1,6 +1,6 @@
 @props([
     'title' => null,
-    'description' => 'Site oficial da banda Nobre Vira Lata: shows, fotos, vídeos, notícias e loja.',
+    'description' => 'Site oficial da banda Soul True Noise: shows, fotos, vídeos, notícias e loja.',
     'image' => null,
     'type' => 'website',
     'noindex' => false,
@@ -17,7 +17,7 @@
         'contact' => 'Contato',
     ];
     $pageTitle = $title ? $title.' — '.config('app.name') : config('app.name');
-    $shareImage = $image ?? asset('images/banda.jpg');
+    $shareImage = $image ?? asset('images/capa.jpg');
 @endphp
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="{{ $description }}">
-        <meta name="theme-color" content="#1f1a17">
+        <meta name="theme-color" content="#0e0d10">
 
         <title>{{ $pageTitle }}</title>
 
@@ -58,9 +58,9 @@
         </a>
 
         <header x-data="{ open: false }" class="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-ink/95 backdrop-blur">
-            <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:h-20 lg:px-8">
+            <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 lg:h-28 lg:px-8">
                 <a href="{{ route('home') }}" class="shrink-0">
-                    <img src="{{ asset('images/logo-horizontal.jpg') }}" alt="{{ config('app.name') }}" width="800" height="221" class="h-11 w-auto lg:h-14">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="{{ config('app.name') }}" width="716" height="657" class="h-16 w-auto lg:h-24">
                 </a>
 
                 <nav class="hidden items-center gap-8 lg:flex" aria-label="Principal">
@@ -106,16 +106,16 @@
             </nav>
         </header>
 
-        <main id="conteudo" class="flex-1 pt-16 lg:pt-20">
+        <main id="conteudo" class="flex-1 pt-20 lg:pt-28">
             {{ $slot }}
         </main>
 
         <footer class="border-t border-white/10">
             <div class="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-10 text-center lg:flex-row lg:justify-between lg:px-8 lg:text-left">
-                <img src="{{ asset('images/logo-horizontal.jpg') }}" alt="{{ config('app.name') }}" width="800" height="221" loading="lazy" class="h-12 w-auto">
+                <img src="{{ asset('images/logo.jpg') }}" alt="{{ config('app.name') }}" width="716" height="657" loading="lazy" class="h-20 w-auto">
 
                 <a href="{{ config('site.instagram_url') }}" target="_blank" rel="noopener" class="font-display text-sm font-medium uppercase tracking-widest transition hover:text-brand">
-                    Instagram · @bandanobreviralata
+                    Instagram · @stn_soul_true_noise
                 </a>
 
                 <p class="text-sm text-white/60">
