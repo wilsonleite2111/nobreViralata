@@ -1,0 +1,61 @@
+{
+  "_fonts-FEp4nbD6.css": {
+    "file": "assets/fonts-FEp4nbD6.css",
+    "src": "_fonts-FEp4nbD6.css"
+  },
+  "_instrument-sans-400-normal-D1W7dsQl.woff": {
+    "file": "assets/instrument-sans-400-normal-D1W7dsQl.woff",
+    "src": "_instrument-sans-400-normal-D1W7dsQl.woff"
+  },
+  "_instrument-sans-400-normal-DRC__1Mx.woff2": {
+    "file": "assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+    "src": "_instrument-sans-400-normal-DRC__1Mx.woff2"
+  },
+  "_instrument-sans-500-normal-Dk9ku72i.woff2": {
+    "file": "assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+    "src": "_instrument-sans-500-normal-Dk9ku72i.woff2"
+  },
+  "_instrument-sans-500-normal-Z6ESRlEs.woff": {
+    "file": "assets/instrument-sans-500-normal-Z6ESRlEs.woff",
+    "src": "_instrument-sans-500-normal-Z6ESRlEs.woff"
+  },
+  "_instrument-sans-600-normal-B7fBEWYG.woff2": {
+    "file": "assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+    "src": "_instrument-sans-600-normal-B7fBEWYG.woff2"
+  },
+  "_instrument-sans-600-normal-B9e8oLYv.woff": {
+    "file": "assets/instrument-sans-600-normal-B9e8oLYv.woff",
+    "src": "_instrument-sans-600-normal-B9e8oLYv.woff"
+  },
+  "_oswald-500-normal-B-eyT0Dw.woff2": {
+    "file": "assets/oswald-500-normal-B-eyT0Dw.woff2",
+    "src": "_oswald-500-normal-B-eyT0Dw.woff2"
+  },
+  "_oswald-500-normal-DM85Di4w.woff": {
+    "file": "assets/oswald-500-normal-DM85Di4w.woff",
+    "src": "_oswald-500-normal-DM85Di4w.woff"
+  },
+  "_oswald-700-normal-UmC9Ev9x.woff": {
+    "file": "assets/oswald-700-normal-UmC9Ev9x.woff",
+    "src": "_oswald-700-normal-UmC9Ev9x.woff"
+  },
+  "_oswald-700-normal-vy6hmKSr.woff2": {
+    "file": "assets/oswald-700-normal-vy6hmKSr.woff2",
+    "src": "_oswald-700-normal-vy6hmKSr.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DA8XAYeO.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BvRk9kiK.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
