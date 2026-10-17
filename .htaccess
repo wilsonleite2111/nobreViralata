@@ -1,0 +1,10 @@
+# The Hostinger Git deployment publishes the whole repository into public_html.
+# Send every request to public/ so only the public folder is ever served.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
